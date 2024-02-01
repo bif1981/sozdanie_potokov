@@ -38,20 +38,27 @@ def chisla(n):
     catch = defaultdict(int)
     for i in range(1, 11):
         print(f'{i}', flush=True)  # flush - небуферизованный вывод
+        time.sleep(1)
 
 
 def bukvy(element):
+    catch = defaultdict(int)
     for number in range(ord("a"), ord("j") + 1):
         print(chr(number), flush=True)
+        time.sleep(1)
 
-chisla_catch = defaultdict(int)
-thread = Thread(target=chisla(n=10)) #catch=chisla_catch)
-thread.start()
+#chisla_catch = defaultdict(int)
+thread1 = Thread(target=chisla, args = (10,)) #catch=chisla_catch)
 
-thread.join()
+#bukvy_catch = defaultdict(int)
+thread2 = Thread(target=bukvy, args = (10,)) #catch=bukvy_catch)
 
-bukvy_catch = defaultdict(int)
-thread = Thread(target=bukvy(element=10)) #catch=bukvy_catch)
+thread1.start()
+thread2.start()
+thread1.join()
+thread2.join()
+
+
 
 # Пример из лекции
 # FISH = (None, 'плотва', 'окунь', 'лещ')
